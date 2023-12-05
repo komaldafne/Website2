@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><center> Loan Management System </center></title>
+  <script>
+    function calculateLoan() {
+      // Get input values
+      var employeeId = document.getElementById("employeeId").value;
+      var employeeName = document.getElementById("employeeName").value;
+      var employeeAddress = document.getElementById("employeeAddress").value;
+      var designation = document.getElementById("designation").value;
+      var loanAmount = parseFloat(document.getElementById("loanAmount").value);
+      var loanDate = new Date(document.getElementById("loanDate").value);
+      var interestRate = parseFloat(document.getElementById("interestRate").value);
+      var maturityDate = new Date(document.getElementById("maturityDate").value);
+      
+      // Validate Employee ID
+      if (employeeId.length < 4 || !employeeId.startsWith("E")) {
+        alert("Employee ID must be at least 4 characters and start with 'E'.");
+        return;
+      }
+
+      // Calculate interest based on designation (You can customize this logic)
+      var interest = 0;
+      switch (designation) {
+        case "Manager":
+          interest = loanAmount * 0.1; // 10% interest for Managers
+          break;
+        case "Developer":
+          interest = loanAmount * 0.08; // 8% interest for Developers
+          break;
+        default:
+          interest = loanAmount * 0.05; // 5% interest for others
+      }
+
+      // Calculate total amount payable
+      var totalAmountPayable = loanAmount + interest;
+
+      // Display results
+      document.getElementById("result").innerHTML =
+        "<strong>Loan Details:</strong><br>" +
+        "Employee ID: " + employeeId + "<br>" +
+        "Employee Name: " + employeeName + "<br>" +
+        "Employee Address: " + employeeAddress + "<br>" +
+        "Designation: " + designation + "<br>" +
+        "<strong>Loan Calculation:</strong><br>" +
+        "Loan Amount: $" + loanAmount.toFixed(2) + "<br>" +
+        "Interest: $" + interest.toFixed(2) + "<br>" +
+        "<strong>Total Amount Payable:</strong> $" + totalAmountPayable.toFixed(2);
+    }
+   
+  </script>
+</head>
+<body>
+    <body style="background-color:aquamarine;"></body>
+  <h1>Loan Management System</h1>
+  <form>
+    <label for="employeeId">Employee ID:</label>
+    <input type="text" id="employeeId" required><br>
+
+    <label for="employeeName">Employee Name:</label>
+    <input type="text" id="employeeName" required><br>
+
+    <label for="employeeAddress">Employee Address:</label>
+    <input type="text" id="employeeAddress" required><br>
+
+    <label for="designation">Designation:</label>
+    <input type="text" id="designation" required><br>
+
+    <label for="loanAmount">Loan Amount:</label>
+    <input type="number" id="loanAmount" required><br>
+
+    <label for="loanDate">Date of Loan Taken:</label>
+    <input type="date" id="loanDate" required><br>
+
+    <label for="interestRate">Interest Rate:</label>
+    <input type="number" id="interestRate" required><br>
+
+    <label for="maturity Date">maturity Date:</label>
+    <input type="date" id="maturityDate" required><br>
+
+    <button type="button" onclick="calculateLoan()">Calculate Loan</button>
+  </form>
+
+  <div id="result"></div>
+</body>
+</html>
